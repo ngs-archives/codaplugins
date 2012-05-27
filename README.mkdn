@@ -9,5 +9,5 @@ Used as a submodule in projects the below
 * [Creole Plug-In][creole]
 
 
-[markdown]: "http://ngs.github.com/markdown-codaplugin/"
-[creole]:   "http://ngs.github.com/creole-codaplugin/"
+[markdown]: http://ngs.github.com/markdown-codaplugin/
+[creole]:   http://ngs.github.com/creole-codaplugin/
