@@ -14,14 +14,13 @@
 
 @property (strong) NSURL *bundleURL;
 
-
-
 - (id)initWithPlugInController:(CodaPlugInsController*)aController
                  withBundleURL:(NSURL *)bundleURL;
 - (void)reloadPreview;
 - (void)reloadStylesheet;
 - (NSString *)html;
 - (NSString *)windowTitle;
+- (NSString *)stylesheetLocationKey;
 - (void)didPreviewClose;
 
 @property (strong) CodaPlugInsController *pluginController;

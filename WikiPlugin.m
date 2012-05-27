@@ -105,8 +105,8 @@ NSString *const kInitialHTMLTemplate = @"<html>\
                            keyEquivalent:nil
                               pluginName:self.name];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults objectForKey:kStylesheetURLDefaultsKey])
-      self.stylesheetURL = [defaults URLForKey:kStylesheetURLDefaultsKey];
+    if([defaults objectForKey:self.stylesheetLocationKey])
+      self.stylesheetURL = [defaults URLForKey:self.stylesheetLocationKey];
   }
   return self;
 }
@@ -147,7 +147,11 @@ NSString *const kInitialHTMLTemplate = @"<html>\
 }
 
 
-#pragma mark -
+#pragma mark - Accessors
+
+- (NSString *)stylesheetLocationKey {
+  return [NSStringFromClass(self.class) stringByAppendingString:kStylesheetURLDefaultsKey];
+}
 
 - (PreviewWindowController *)previewWindowController {
   if(nil==_previewWindowController)
@@ -158,7 +162,7 @@ NSString *const kInitialHTMLTemplate = @"<html>\
 - (void)setStylesheetURL:(NSURL *)stylesheetURL {
   _stylesheetURL = stylesheetURL;
   NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setURL:stylesheetURL forKey:kStylesheetURLDefaultsKey];
+  [defaults setURL:stylesheetURL forKey:self.stylesheetLocationKey];
   [defaults synchronize];
   [self reloadStylesheet];
 }

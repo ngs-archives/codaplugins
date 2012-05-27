@@ -12,6 +12,7 @@
 @interface PreviewWindowController : NSWindowController
 
 - (id)initWithPlugin:(WikiPlugin *)plugin;
+- (NSString *)frameSaveName;
 
 @property (weak) WikiPlugin *plugin;
 @property (weak) IBOutlet WebView *webView;

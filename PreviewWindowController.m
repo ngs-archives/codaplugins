@@ -32,12 +32,12 @@ NSString *const kWindowSaveName = @"PreviewWindow";
 
 - (void)windowDidLoad {
   self.window.level = NSStatusWindowLevel;
-  self.window.frameAutosaveName = [NSStringFromClass(self.plugin.class) stringByAppendingString:kWindowSaveName];
+  self.window.frameAutosaveName = self.frameSaveName;
   [super windowDidLoad];
 }
 
 - (void)windowDidMove:(NSNotification *)aNotification {
-  [self.window saveFrameUsingName:[NSStringFromClass(self.plugin.class) stringByAppendingString:kWindowSaveName]];
+  [self.window saveFrameUsingName:self.frameSaveName];
 }
 
 - (void)showWindow:(id)sender {
@@ -46,6 +46,10 @@ NSString *const kWindowSaveName = @"PreviewWindow";
 
 - (void)windowWillClose:(NSNotification *)notification {
   [self.plugin didPreviewClose];
+}
+
+- (NSString *)frameSaveName {
+  return [NSStringFromClass(self.plugin.class) stringByAppendingString:kWindowSaveName];
 }
 
 @end
