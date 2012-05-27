@@ -16,15 +16,13 @@
 
 - (id)initWithPlugInController:(CodaPlugInsController*)aController
                  withBundleURL:(NSURL *)bundleURL;
-- (void)reloadPreview;
-- (void)reloadStylesheet;
 - (NSString *)html;
 - (NSString *)windowTitle;
-- (NSString *)stylesheetLocationKey;
-- (void)didPreviewClose;
+- (NSURL *)defaultStylesheetURL;
+- (void)reloadPreview;
 
 @property (strong) CodaPlugInsController *pluginController;
 @property (readonly) PreviewWindowController *previewWindowController;
-@property (strong) NSURL *stylesheetURL;
+
 
 @end

@@ -7,33 +7,17 @@
 //
 
 #import "WikiPlugin.h"
-#import <WebKit/WebKit.h>
 #import "PreviewWindowController.h"
 
 @interface WikiPlugin ()
-
-@property (strong) NSString *cachedHTML;
 
 @end
 
 @implementation WikiPlugin
 
-NSString *const kStylesheetURLDefaultsKey = @"SelectedStylesheetURL";
-
-NSString *const kInitialHTMLTemplate = @"<html>\
-<head>\
-<link rel=\"stylesheet\" type=\"text/css\" href=\"%@\">\
-</head>\
-<body>\
-%@\
-</body>\
-</html>";
-
 @synthesize pluginController = _pluginController
 , previewWindowController = _previewWindowController
-, stylesheetURL = _stylesheetURL
 , bundleURL = _bundleURL
-, cachedHTML = _cachedHTML
 ;
 
 #pragma mark - Methods should be implmented in subclasses
@@ -104,16 +88,12 @@ NSString *const kInitialHTMLTemplate = @"<html>\
                        representedObject:nil
                            keyEquivalent:nil
                               pluginName:self.name];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    if([defaults objectForKey:self.stylesheetLocationKey])
-      self.stylesheetURL = [defaults URLForKey:self.stylesheetLocationKey];
   }
   return self;
 }
 
 - (void)textViewDidFocus:(CodaTextView *)textView {
   [self reloadPreview];
-  self.previewWindowController.window.title = self.windowTitle;
 }
 
 - (void)textViewWillSave:(CodaTextView *)textView {
@@ -125,7 +105,6 @@ NSString *const kInitialHTMLTemplate = @"<html>\
 - (void)openPreview:(id)sender {
   [self.previewWindowController showWindow:self];
   [self reloadPreview];
-  self.previewWindowController.window.title = self.windowTitle;
 }
 
 - (void)generateHTML:(id)sender {
@@ -139,37 +118,21 @@ NSString *const kInitialHTMLTemplate = @"<html>\
   [pane setAllowedFileTypes:[NSArray arrayWithObject:@"css"]];
   [pane beginWithCompletionHandler:^(NSInteger result) {
     if(result == NSOKButton && pane.URL)
-      self.stylesheetURL = pane.URL;
+      self.previewWindowController.stylesheetURL = pane.URL;
   }];
 }
 
-- (void)didPreviewClose {
+- (void)reloadPreview {
+  self.previewWindowController.window.title = self.windowTitle;
+  self.previewWindowController.html = self.html;
 }
-
 
 #pragma mark - Accessors
-
-- (NSString *)stylesheetLocationKey {
-  return [NSStringFromClass(self.class) stringByAppendingString:kStylesheetURLDefaultsKey];
-}
 
 - (PreviewWindowController *)previewWindowController {
   if(nil==_previewWindowController)
     _previewWindowController = [[PreviewWindowController alloc] initWithPlugin:self];
   return _previewWindowController;
-}
-
-- (void)setStylesheetURL:(NSURL *)stylesheetURL {
-  _stylesheetURL = stylesheetURL;
-  NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-  [defaults setURL:stylesheetURL forKey:self.stylesheetLocationKey];
-  [defaults synchronize];
-  [self reloadStylesheet];
-}
-
-- (NSURL *)stylesheetURL {
-  return _stylesheetURL && [[NSFileManager defaultManager] fileExistsAtPath:_stylesheetURL.path] ?
-  _stylesheetURL : [self.bundleURL URLByAppendingPathComponent:@"Contents/Resources/Default.css"];
 }
 
 - (NSString *)windowTitle {
@@ -182,40 +145,8 @@ NSString *const kInitialHTMLTemplate = @"<html>\
   return title;
 }
 
-#pragma mark - Render
-
-- (void)reloadStylesheet {
-  [[self.previewWindowController.webView.mainFrame windowObject]
-   evaluateWebScript:
-   [NSString 
-    stringWithFormat:
-    @"document.querySelector(\"link[rel='stylesheet']\").setAttribute(\"href\", \"%@\")",
-    self.stylesheetURL.absoluteString]];
-}
-
-- (void)reloadPreview {
-  NSString *html = self.html;
-  NSError *error = nil;
-  WebFrame *frame = self.previewWindowController.webView.mainFrame;
-  WebScriptObject *win = [frame windowObject];
-  NSString *innerHTML = [win evaluateWebScript:[NSString stringWithFormat:@"document.body.innerHTML;"]];
-  if(!innerHTML||[innerHTML isEqualToString:@""]) {
-    NSString *contentHTML = [NSString stringWithFormat:kInitialHTMLTemplate,
-                             self.stylesheetURL.absoluteString, html];
-    [self.previewWindowController.webView.mainFrame
-     loadHTMLString:contentHTML
-     baseURL:self.bundleURL];
-  } else if(![html isEqualToString:self.cachedHTML]) {
-    NSString * jsHTML =
-    html ?
-    [[NSString alloc] initWithData:
-     [NSJSONSerialization dataWithJSONObject:html
-                                     options:NSJSONReadingAllowFragments
-                                       error:&error] encoding:NSUTF8StringEncoding] : @"";
-    if(error) NSLog(@"%@", error);
-    [win evaluateWebScript:[NSString stringWithFormat:@"document.body.innerHTML=%@",jsHTML]];
-  }
-  self.cachedHTML = html;
+- (NSURL *)defaultStylesheetURL {
+  return [self.bundleURL URLByAppendingPathComponent:@"Contents/Resources/Default.css"];
 }
 
 @end

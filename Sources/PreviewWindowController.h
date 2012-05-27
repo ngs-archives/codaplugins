@@ -12,10 +12,16 @@
 @interface PreviewWindowController : NSWindowController
 
 - (id)initWithPlugin:(WikiPlugin *)plugin;
+
 - (NSString *)frameSaveName;
+- (NSString *)stylesheetLocationKey;
+
+- (void)reloadStylesheet;
+- (void)reloadPreview;
 
 @property (weak) WikiPlugin *plugin;
 @property (weak) IBOutlet WebView *webView;
-
+@property (strong) NSURL *stylesheetURL;
+@property (strong) NSString *html;
 
 @end
