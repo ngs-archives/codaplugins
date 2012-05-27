@@ -1,13 +1,8 @@
-Coda Wiki Plug-Ins Shared
+Coda Plug-Ins Shared
 =======================
 
-Shared Sources for Coda Wiki Plug-Ins
+Shared Sources for Coda Plug-Ins
 
-Used as a submodule in projects the below
+This project is used as a submodule.
 
-* [Markdown Plug-In][markdown]
-* [Creole Plug-In][creole]
-
-
-[markdown]: http://ngs.github.com/markdown-codaplugin/
-[creole]:   http://ngs.github.com/creole-codaplugin/
+    $ git submodule add -b shared git@github.com:ngs/codaplugins.git Shared
