@@ -1,0 +1,27 @@
+# Coda Plug-Ins Dev
+
+## [Gist][gist-codaplugin]
+
+This plug-in allows you to create public and private gists from current active document.
+
+[![Gist Plug-In](http://ngs.github.com/gist-codaplugin/images/screen.png)][gist-codaplugin]
+
+## [Markdown][markdown-codaplugin]
+
+This plug-in allows you to preview and generate HTML from [Markdown][markdown] wiki documents.
+
+[![Markdown Plug-In](http://ngs.github.com/markdown-codaplugin/images/screen.png)][markdown-codaplugin]
+
+## [Creole][creole-codaplugin]
+
+This plug-in allows you to preview and generate HTML from [Creole][creole] wiki documents.
+
+[![Creole Plug-In](http://ngs.github.com/creole-codaplugin/images/screen.png)][creole-codaplugin]
+
+
+
+[creole]:   http://www.wikicreole.org/
+[markdown]: http://daringfireball.net/projects/markdown/
+[gist-codaplugin]: http://ngs.github.com/gist-codaplugin/
+[markdown-codaplugin]: http://ngs.github.com/markdown-codaplugin/
+[creole-codaplugin]: http://ngs.github.com/creole-codaplugin/
