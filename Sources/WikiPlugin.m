@@ -7,7 +7,7 @@
 //
 
 #import "WikiPlugin.h"
-#import "PreviewWindowController.h"
+#import "WikiPreviewWindowController.h"
 
 @interface WikiPlugin ()
 
@@ -129,9 +129,9 @@
 
 #pragma mark - Accessors
 
-- (PreviewWindowController *)previewWindowController {
+- (WikiPreviewWindowController *)previewWindowController {
   if(nil==_previewWindowController)
-    _previewWindowController = [[PreviewWindowController alloc] initWithPlugin:self];
+    _previewWindowController = [[WikiPreviewWindowController alloc] initWithPlugin:self];
   return _previewWindowController;
 }
 

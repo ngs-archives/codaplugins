@@ -6,23 +6,23 @@
 //  Copyright (c) 2012 LittleApps Inc. All rights reserved.
 //
 
-#import "PreviewWindowController.h"
+#import "WikiPreviewWindowController.h"
 #import "WikiPlugin.h"
 #import <WebKit/WebKit.h>
 
-@interface PreviewWindowController ()
+@interface WikiPreviewWindowController ()
 
 @property (strong) NSString *cachedHTML;
 
 @end
 
-@implementation PreviewWindowController
+@implementation WikiPreviewWindowController
 
 // ------------------------------------------------------------
 //   Constants
 // ------------------------------------------------------------
 
-NSString *const kWindowSaveName = @"PreviewWindow";
+NSString *const kWindowSaveName = @"WikiPreviewWindow";
 
 NSString *const kStylesheetURLDefaultsKey = @"SelectedStylesheetURL";
 
@@ -44,7 +44,7 @@ NSString *const kInitialHTMLTemplate = @"<html>\
 ;
 
 - (id)initWithPlugin:(WikiPlugin *)plugin {
-  if (self=[super initWithWindowNibName:@"PreviewWindow" owner:self]) {
+  if (self=[super initWithWindowNibName:@"WikiPreviewWindow" owner:self]) {
     self.plugin = plugin;
   }
   return self;

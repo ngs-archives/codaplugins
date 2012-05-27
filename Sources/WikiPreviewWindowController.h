@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 
 @class WikiPlugin, WebView;
-@interface PreviewWindowController : NSWindowController
+@interface WikiPreviewWindowController : NSWindowController
 
 - (id)initWithPlugin:(WikiPlugin *)plugin;
 

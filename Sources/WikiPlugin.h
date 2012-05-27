@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CodaPlugInsController.h"
 
-@class PreviewWindowController;
+@class WikiPreviewWindowController;
 @interface WikiPlugin : NSObject<CodaPlugIn>
 
 @property (strong) NSURL *bundleURL;
@@ -22,7 +22,7 @@
 - (void)reloadPreview;
 
 @property (strong) CodaPlugInsController *pluginController;
-@property (readonly) PreviewWindowController *previewWindowController;
+@property (readonly) WikiPreviewWindowController *previewWindowController;
 
 
 @end
