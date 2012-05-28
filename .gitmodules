@@ -16,3 +16,6 @@
 [submodule "creole"]
 	path = creole
 	url = git@github.com:ngs/creole-codaplugin.git
+[submodule "pages/main"]
+	path = pages/main
+	url = git@github.com:ngs/codaplugins.git
