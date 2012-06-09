@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:arduino/Arduino.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:gist/Gist.xcodeproj">
    </FileRef>
    <FileRef
