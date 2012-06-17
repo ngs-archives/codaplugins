@@ -13,4 +13,7 @@
    <FileRef
       location = "group:creole/Creole.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:evernote/Evernote.xcodeproj">
+   </FileRef>
 </Workspace>

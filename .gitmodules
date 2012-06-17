@@ -22,3 +22,6 @@
 [submodule "pages/main"]
 	path = pages/main
 	url = git@github.com:ngs/codaplugins.git
+[submodule "evernote"]
+	path = evernote
+	url = git@github.com:ngs/evernote-codaplugin.git
