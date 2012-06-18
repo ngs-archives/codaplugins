@@ -25,3 +25,6 @@
 [submodule "evernote"]
 	path = evernote
 	url = git@github.com:ngs/evernote-codaplugin.git
+[submodule "pages/evernote"]
+	path = pages/evernote
+	url = git@github.com:ngs/evernote-codaplugin.git
