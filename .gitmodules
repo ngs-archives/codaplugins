@@ -16,6 +16,15 @@
 [submodule "creole"]
 	path = creole
 	url = git@github.com:ngs/creole-codaplugin.git
+[submodule "arduino"]
+	path = arduino
+	url = git@github.com:ngs/arduino-codaplugin.git
 [submodule "pages/main"]
 	path = pages/main
 	url = git@github.com:ngs/codaplugins.git
+[submodule "evernote"]
+	path = evernote
+	url = git@github.com:ngs/evernote-codaplugin.git
+[submodule "pages/evernote"]
+	path = pages/evernote
+	url = git@github.com:ngs/evernote-codaplugin.git
