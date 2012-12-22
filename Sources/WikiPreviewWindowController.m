@@ -73,11 +73,11 @@ NSString *const kInitialHTMLTemplate = @"<html>\
 #pragma mark - 
 
 - (void)webView:(WebView *)webView decidePolicyForNavigationAction:(NSDictionary *)actionInformation request:(NSURLRequest *)request frame:(WebFrame *)frame decisionListener:(id < WebPolicyDecisionListener >)listener {
-  if([request.URL.path isEqualToString:self.plugin.bundleURL.path])
-    [listener use];
-  else {
+  if([[actionInformation valueForKey:WebActionNavigationTypeKey] intValue] == WebNavigationTypeLinkClicked) {
     [[NSWorkspace sharedWorkspace] openURL:request.URL];
     [listener ignore];
+  } else {
+    [listener use];
   }
 }
 
